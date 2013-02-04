@@ -2,7 +2,6 @@
 
 using namespace std;
 
-
 /* NOTE: the current implementation can only be used to single-pointer dereferencing,
  * cannot dereference array pointer. (that require overloading the [] and + function)
  */
@@ -10,7 +9,7 @@ template<class T>
 class Smart_Pointer_{
 private:
   T * target_;
-  unsigned int * reference_ = 0;
+  unsigned int * reference_;
 
 public:
   // the constructor ordinary constructor.
@@ -49,6 +48,9 @@ public:
     return this->target_;
   }
 
+  // overload the operator ++.
+  // overload the operator --.
+
   // overload the assignment operator =.
   // **** test if the current pointer is this to-be-assigned pointer
   // **** there should be test for NULL, case, => equivalent to disabling the pointer
@@ -69,7 +71,7 @@ public:
   ~Smart_Pointer_(){
     if( this->reference != 0 )
       this->reset();
-    if( this->reference == 0 )
+    if( this->reference == 0 && this->reference_ != NULL)
       delete this->reference_;
   }
 
@@ -86,3 +88,16 @@ public:
   // define the getter for target_
   T* get_reference_(){ return this->reference_; }
 };
+
+int main( int argc, char ** argv ){
+  
+  /* design of test cases:
+  * 1. Test the creation of smart pointer, then execute the destructor
+  * 2. Test the copy constructor of the smart pointer, then execute the destructor
+  * 3. Test the indirection of primitive type, string, struct, and class object
+  * 4. Test the dereference of the primitive type, string, struct and class object
+  * 5. Test the = sign operator, check the update of reference_
+  * 6. Test the reset function, check the set of reference_ to null
+  */
+  return 0;
+}
